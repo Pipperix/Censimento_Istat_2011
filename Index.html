@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<title> Censimento ISTAT 2011 </title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+		<link rel="stylesheet" href="Stile.css">
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+		<script type="text/javascript" src="Script.js"></script>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    </head>
+    <body>
+        
+       <div class="header">
+	<a href="Index.html" class="logo" id="title" data-toggle="tooltip" title="Torna alla Home"> Censimento ISTAT 2011 </a>
+
+    <div class="header-right">
+      <a id="activateTable" class="active" href="javascript:toggletab()">Tabelle</a>
+      <a id ="activateChart" class="" href="javascript:togglechart()">Grafici</a>
+    </div>
+  </div>
+
+  <br />
+
+  <div class="container">
+   <div class="table-responsive">
+    <div align="center">
+     <input type="text" id="searchBar" onkeyup="research()" placeholder="Inserisci la regione da ricercare...">
+    </div>
+    <br />
+    
+	<div id="population_table">
+    </div>
+	
+   </div>
+     
+   <div align="center">
+   <div id="population_charts" hidden>
+     
+   </div>
+   </div>
+   
+  </div>
+
+  <!-- Funzioni di ricerca e selezione -->
+  <script>
+	function selectReg(){
+		var selectedReg = this.textContent || this.innerText;
+		document.getElementById("title").textContent += ' - '+selectedReg;
+		document.getElementById("searchBar").placeholder = 'Inserisci la provincia da ricercare...';
+		prepareTableProv(selectedReg);
+	}
+  </script>
+
+    </body>
+</html>
