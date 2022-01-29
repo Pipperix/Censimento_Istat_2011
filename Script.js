@@ -1,5 +1,3 @@
-document.addEventListener("DOMContentLoaded", function(event) { 
-
 //Variabili Globali
 
 var data = new Array();
@@ -53,21 +51,27 @@ class ObjComune {
 	}
 }
 
+//-------------------------------------------------------------------------------------
+//------------------------------------HTML LOADER--------------------------------------
+//-------------------------------------------------------------------------------------
+
+document.addEventListener("DOMContentLoaded", function(event) { 
+
 //Caricamento del CSV nell'array di oggetti 
 
 toArray();
 
 async function toArray(){
     var request = new XMLHttpRequest();  
-request.open("GET", "censimentoistat.csv", false);   
-request.send(null);  
+	request.open("GET", "censimentoistat.csv", false);   
+	request.send(null);  
 
-var csvData = new Array();
-var jsonObject = request.responseText.split(/\r?\n|\r/);
-for (var i = 0; i < jsonObject.length; i++) {
-  csvData.push(jsonObject[i].split(','));
-}
-csvData.forEach(row => {
+	var csvData = new Array();
+	var jsonObject = request.responseText.split(/\r?\n|\r/);
+	for (var i = 0; i < jsonObject.length; i++) {
+  	csvData.push(jsonObject[i].split(','));
+	}
+	csvData.forEach(row => {
 	var Riga = row[0].split(";");
 	var ObjRow = new ObjRiga(Riga[0],Riga[1],Riga[2],Riga[3],Riga[4],Riga[5],Riga[6]);
 	data.push(ObjRow);	
@@ -102,17 +106,13 @@ async function prepareTableReg(){
 			
 		}else {
 			
-			//console.log(objectR);
 			totRegione.push(objectR);
 			objectR = new ObjRegione(data[i].Regione, parseInt(data[i].Femmine), parseInt(data[i].Maschi), parseInt(data[i].Totale));
 			reg.push(data[i].Regione);
 		}
 	}
 	
-	//console.log(objectR);
 	totRegione.push(objectR);
-	//console.log(totRegione);
-	//console.log(reg);
 	toTableReg();
 }
 
@@ -138,14 +138,47 @@ async function toTableReg(){
 	$('#population_table').html(table_data);
 }
 
-/*
+function LoadGoogle(){
+	google.charts.load('current', {
+	  callback: drawChartReg,
+	  packages:['corechart']
+});
+
+	drawChartReg();
+
+	async function drawChartReg(){
+		var dataChart = new google.visualization.DataTable();
+			dataChart.addColumn('string', 'Place');
+			dataChart.addColumn('number', 'Population');
+			for(i = 0; i<totRegione.length; i++){
+			dataChart.addRows([
+			[totRegione[i].Regione, totRegione[i].Totale],
+			]);
+			}
+			var options = {'title':'Popolazione per Regioni', width: 750, height: 700, pieSliceText: 'none', is3D: true};
+			
+			
+			var chart = new google.visualization.PieChart(document.getElementById('population_charts'));
+			chart.draw(dataChart, options);
+		
+	}
+}
+
+LoadGoogle();
+
+}); 
+//-------------------------------------------------------------------------------------
+//-------------------------------------HTML LOADER-------------------------------------
+//-------------------------------------------------------------------------------------
+
 function selectReg(){
 	var selectedReg = this.textContent || this.innerText;
 	document.getElementById("title").textContent += ' - '+selectedReg;
 	document.getElementById("searchBar").placeholder = 'Inserisci la provincia da ricercare...';
 	prepareTableProv(selectedReg);
 }
-*/
+
+
 
 //Preparazione tabella delle PROVINCE + creazione della tabella
 
@@ -177,17 +210,17 @@ function prepareTableProv(Regione){
 		}
 	}
 	totProvincia.push(objectP);
-	console.log(totProvincia);
+	//console.log(totProvincia);
 	$("#population_charts").html("");
 	toFilteredTableProvincia();
 	drawChartProv();
 }
-			
+	
 
- function toFilteredTableProvincia(){
- $('#tab').remove();
- i = 0;
- var table_data = '<table id="tab" class="table table-bordered table-striped">';
+function toFilteredTableProvincia(){
+	$('#tab').remove();
+	i = 0;
+	var table_data = '<table id="tab" class="table table-bordered table-striped">';
 		table_data+= '<tr>';
 		table_data += '<th>'+data[0].Provincia+'</th>';
 		table_data += '<th>'+data[0].Femmine+'</th>';
@@ -244,16 +277,16 @@ function prepareTableCom(Provincia){
 		}
 	}
 	totComune.push(objectC);
-	console.log(totComune);
+	//console.log(totComune);
 	$("#population_charts").html("");
 	toFilteredTableComune();
 	drawChartCom();
 }
 
 function toFilteredTableComune(){
- $('#tab').remove();
- i = 0;
- var table_data = '<table id="tab" class="table table-bordered table-striped">';
+	$('#tab').remove();
+ 	i = 0;
+ 	var table_data = '<table id="tab" class="table table-bordered table-striped">';
 		table_data+= '<tr>';
 		table_data += '<th>'+data[0].Comune+'</th>';
 		table_data += '<th>'+data[0].Femmine+'</th>';
@@ -272,10 +305,10 @@ function toFilteredTableComune(){
 	$('#population_table').html(table_data);
  }
 
- //Funzione di ricerca
+//Funzione di ricerca
  
- function research(){
-    var input, filter, table, tr, td, i, txtValue;
+function research(){
+	var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("searchBar");
     filter = input.value.toUpperCase();
     table = document.getElementById("population_table");
@@ -324,30 +357,8 @@ function togglechart(){
 
 }
 
-//------------------------------------------------------
+//-------------------------------------------------------------------------------------
 //Grafico
-/*
-google.charts.load('current', {'packages':['corechart']});
-google.charts.setOnLoadCallback(drawChartReg);
-
-drawChartReg();
-
-async function drawChartReg(){
-	var dataChart = new google.visualization.DataTable();
-        dataChart.addColumn('string', 'Place');
-        dataChart.addColumn('number', 'Population');
-		for(i = 0; i<totRegione.length; i++){
-        dataChart.addRows([
-          [totRegione[i].Regione, totRegione[i].Totale],
-        ]);
-		}
-		var options = {'title':'Popolazione per Regioni', width: 750, height: 700, pieSliceText: 'none', is3D: true};
-		 
-		
-		var chart = new google.visualization.PieChart(document.getElementById('population_charts'));
-        chart.draw(dataChart, options);
-	
-}
 
 function drawChartProv(){
 	var dataChart = new google.visualization.DataTable();
@@ -384,6 +395,6 @@ function drawChartCom(){
         chart.draw(dataChart, options);
 	
 }
-*/
 
-});
+
+
