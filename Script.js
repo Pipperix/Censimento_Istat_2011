@@ -155,7 +155,7 @@ function LoadGoogle(){
 			[totRegione[i].Regione, totRegione[i].Totale],
 			]);
 			}
-			var options = {'title':'Popolazione per Regioni', width: 750, height: 700, pieSliceText: 'none', is3D: true};
+			var options = {'title':'Popolazione per Regioni', width: 850, height: 800, pieSliceText: 'none', is3D: true};
 			
 			
 			var chart = new google.visualization.PieChart(document.getElementById('population_charts'));
@@ -171,14 +171,13 @@ LoadGoogle();
 //-------------------------------------HTML LOADER-------------------------------------
 //-------------------------------------------------------------------------------------
 
+
 function selectReg(){
 	var selectedReg = this.textContent || this.innerText;
 	document.getElementById("title").textContent += ' - '+selectedReg;
 	document.getElementById("searchBar").placeholder = 'Inserisci la provincia da ricercare...';
 	prepareTableProv(selectedReg);
 }
-
-
 
 //Preparazione tabella delle PROVINCE + creazione della tabella
 
@@ -295,7 +294,7 @@ function toFilteredTableComune(){
 		table_data+= '</tr>';
 	for(i = 0;i < totComune.length; i++){
 		table_data+= '<tr>';		
-        table_data+= '<td>' + totComune[i].Comune + '</button> </td>'; 
+        table_data+= '<td>' + totComune[i].Comune + '</td>'; 
         table_data+= '<td>' + totComune[i].Femmine + '</td>';
 		table_data+= '<td>' + totComune[i].Maschi + '</td>';
 		table_data+= '<td>' + totComune[i].Totale + '</td>';
@@ -337,8 +336,8 @@ function toggletab(){
 		charts.setAttribute("hidden",true);
     	table.removeAttribute("hidden");
 		search.removeAttribute("hidden");
-		document.getElementById('activateTable').className = "active";
-		document.getElementById('activateChart').className = "inactive";
+		document.getElementById('activateTable').className = "btn btn-primary me-3";
+		document.getElementById('activateChart').className = "btn btn-outline-primary";
 	}
 
 }
@@ -351,8 +350,8 @@ function togglechart(){
     	table.setAttribute("hidden",true);
 		search.setAttribute("hidden",true);
     	charts.removeAttribute("hidden");
-		document.getElementById('activateChart').className = "active";
-		document.getElementById('activateTable').className = "inactive";
+		document.getElementById('activateChart').className = "btn btn-primary";
+		document.getElementById('activateTable').className = "btn btn-outline-primary me-3";
   }
 
 }
@@ -371,7 +370,7 @@ function drawChartProv(){
         ]);
 		}
 		
-		var options = {'title':'Popolazione per Province', width: 750, height: 700, pieSliceText: 'none', is3D: true};
+		var options = {'title':'Popolazione per Province', width: 850, height: 800, pieSliceText: 'none', is3D: true};
 		
 		var chart = new google.visualization.PieChart(document.getElementById('population_charts'));
         chart.draw(dataChart, options);
@@ -389,7 +388,7 @@ function drawChartCom(){
         ]);
 		}
 		
-		var options = {'title':'Popolazione per Comuni', width: 750, height: 700, pieSliceText: 'none', is3D: true, sliceVisibilityThreshold: .02};
+		var options = {'title':'Popolazione per Comuni', width: 850, height: 800, pieSliceText: 'none', is3D: true, sliceVisibilityThreshold: .02};
 		
 		var chart = new google.visualization.PieChart(document.getElementById('population_charts'));
         chart.draw(dataChart, options);

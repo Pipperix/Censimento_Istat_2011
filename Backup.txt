@@ -1,0 +1,14 @@
+
+      <!--
+        <div class="header">
+	      <a href="Index.html" class="logo" id="title" data-toggle="tooltip" title="Torna alla Home"> Censimento ISTAT 2011 </a>
+
+        <div class="header-right">
+          <a id="activateTable" class="active" href="javascript:toggletab()">Tabelle</a>
+          <a id ="activateChart" class="" href="javascript:togglechart()">Grafici</a>
+        </div>
+      </div>
+      -->
+
+
+      
