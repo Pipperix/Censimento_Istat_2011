@@ -242,6 +242,11 @@ function toFilteredTableProvincia(){
 function selectProv(){
 	var selectedProv = this.textContent || this.innerText;
 	document.getElementById("title").textContent += ' - '+selectedProv;
+
+	/*var str = document.getElementById("title").textContent;
+	str = str.split(" - ");
+	console.log(str);*/
+
 	document.getElementById("searchBar").placeholder = 'Inserisci il comune da ricercare...';
 	prepareTableCom(selectedProv);
 }

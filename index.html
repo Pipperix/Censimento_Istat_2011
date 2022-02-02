@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	      
+      <title> Censimento ISTAT 2011 </title>
+
+      <link rel="stylesheet" href="Stile.css">
+      <script type="text/javascript" src="Script.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    </head>
+    <body>
+      
+      <nav class="navbar navbar-light bg-light" id="nav">
+        <div class="container-fluid" id="navigation">
+          <a href="index.html" class="navbar-brand" id="title" data-toggle="tooltip" title="Torna alla Home">Censimento ISTAT 2011</a>
+          <div class="btn-toolbar">
+            <button type="button" id="activateTable" class="btn btn-primary me-3" onclick="toggletab()">Tabelle</button>
+            <button type="button" id="activateChart" class="btn btn-outline-primary" onclick="togglechart()">Grafici</button>
+          </div>
+        </div>
+      </nav>
+
+    <br />
+
+      <div class="container">
+        <div class="table-responsive">
+          <div align="center">
+          <input type="text" id="searchBar" onkeyup="research()" onfocus="this.value=''" placeholder="Inserisci la regione da ricercare...">
+        </div>
+    <br />
+    
+	      <div id="population_table">
+        </div>
+	
+      </div>
+     
+      <div align="center">
+      <div id="population_charts" hidden>
+     
+      </div>
+      </div>
+   
+    </div>
+     
+  </body>
+</html>
