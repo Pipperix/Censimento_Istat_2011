@@ -155,7 +155,7 @@ function LoadGoogle(){
 			[totRegione[i].Regione, totRegione[i].Totale],
 			]);
 			}
-			var options = {'title':'Popolazione per Regioni', width: 850, height: 800, pieSliceText: 'none', is3D: true};
+			var options = {title:'Popolazione per Regioni', pieSliceText: 'none', is3D: true};
 			
 			
 			var chart = new google.visualization.PieChart(document.getElementById('population_charts'));
@@ -242,11 +242,6 @@ function toFilteredTableProvincia(){
 function selectProv(){
 	var selectedProv = this.textContent || this.innerText;
 	document.getElementById("title").textContent += ' - '+selectedProv;
-
-	/*var str = document.getElementById("title").textContent;
-	str = str.split(" - ");
-	console.log(str);*/
-
 	document.getElementById("searchBar").placeholder = 'Inserisci il comune da ricercare...';
 	prepareTableCom(selectedProv);
 }
@@ -331,7 +326,7 @@ function research(){
   }
 }
  
-//Funzione dei bottoni (header)
+//Funzione dei bottoni (navbar)
 
 function toggletab(){
 	let table = document.getElementById('population_table');
@@ -341,7 +336,7 @@ function toggletab(){
 		charts.setAttribute("hidden",true);
     	table.removeAttribute("hidden");
 		search.removeAttribute("hidden");
-		document.getElementById('activateTable').className = "btn btn-primary me-3";
+		document.getElementById('activateTable').className = "btn btn-primary";
 		document.getElementById('activateChart').className = "btn btn-outline-primary";
 	}
 
@@ -356,7 +351,7 @@ function togglechart(){
 		search.setAttribute("hidden",true);
     	charts.removeAttribute("hidden");
 		document.getElementById('activateChart').className = "btn btn-primary";
-		document.getElementById('activateTable').className = "btn btn-outline-primary me-3";
+		document.getElementById('activateTable').className = "btn btn-outline-primary";
   }
 
 }
