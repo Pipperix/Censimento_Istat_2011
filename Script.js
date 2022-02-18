@@ -174,7 +174,6 @@ LoadGoogle();
 
 function selectReg(){
 	var selectedReg = this.textContent || this.innerText;
-	document.getElementById("title").textContent += ' - '+selectedReg;
 	document.getElementById("searchBar").placeholder = 'Inserisci la provincia da ricercare...';
 	prepareTableProv(selectedReg);
 }
@@ -241,7 +240,6 @@ function toFilteredTableProvincia(){
 
 function selectProv(){
 	var selectedProv = this.textContent || this.innerText;
-	document.getElementById("title").textContent += ' - '+selectedProv;
 	document.getElementById("searchBar").placeholder = 'Inserisci il comune da ricercare...';
 	prepareTableCom(selectedProv);
 }
