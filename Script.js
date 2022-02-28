@@ -52,7 +52,7 @@ class ObjComune {
 }
 
 //-------------------------------------------------------------------------------------
-//------------------------------------HTML LOADER--------------------------------------
+//------------------------------------HTML ONLOAD--------------------------------------
 //-------------------------------------------------------------------------------------
 
 document.addEventListener("DOMContentLoaded", function(event) { 
@@ -155,12 +155,11 @@ function LoadGoogle(){
 			[totRegione[i].Regione, totRegione[i].Totale],
 			]);
 			}
-			var options = {title:'Popolazione per Regioni', pieSliceText: 'none', is3D: true};
+			var options = {title:'Popolazione per Regioni', width: 850, height: 800, pieSliceText: 'none', is3D: true};
 			
 			
 			var chart = new google.visualization.PieChart(document.getElementById('population_charts'));
-			chart.draw(dataChart, options);
-		
+			chart.draw(dataChart, options);		
 	}
 }
 
@@ -168,7 +167,7 @@ LoadGoogle();
 
 }); 
 //-------------------------------------------------------------------------------------
-//-------------------------------------HTML LOADER-------------------------------------
+//-------------------------------------HTML ONLOAD-------------------------------------
 //-------------------------------------------------------------------------------------
 
 
