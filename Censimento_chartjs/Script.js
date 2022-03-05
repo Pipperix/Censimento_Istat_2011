@@ -6,6 +6,7 @@ var totProvincia = new Array();
 var totComune = new Array();
 var i = 0;
 
+
 //Variabili Grafico
 var labels = new Array();
 var chartdata = new Array();
@@ -164,13 +165,20 @@ async function drawCanvasReg(){
     	data: {
 			labels: labels,
 			datasets: [{
-				label: 'Abitanti per Regione',
 				data: chartdata,
 				backgroundColor: colors,
 				borderWidth: 1
 			}]
     	},
     	options: {
+			responsive: true,
+    		maintainAspectRatio: false,
+			plugins: {
+				subtitle: {
+					display: true,
+					text: 'Abitanti per Regione'
+				}
+			}
     	}
 	});
 
@@ -180,12 +188,20 @@ async function drawCanvasReg(){
 	
 }
 
+modifyTitle();
+
+async function modifyTitle(){
+	var x = window.matchMedia("(max-width: 320px)");
+	if (x.matches) { // If media query matches
+		document.getElementById("title").textContent = "Censimento 2011";
+	}
+}
+
 
 }); 
 //-------------------------------------------------------------------------------------
 //-------------------------------------HTML ONLOAD-------------------------------------
 //-------------------------------------------------------------------------------------
-
 
 function selectReg(){
 	var selectedReg = this.textContent || this.innerText;
@@ -395,13 +411,20 @@ function drawCanvasProv(){
 		data: {
 			labels: labels,
 			datasets: [{
-				label: 'Abitanti per Provincia',
 				data: chartdata,
 				backgroundColor: colors,
 				borderWidth: 1
 			}]
 		},
 		options: {
+			responsive: true,
+    		maintainAspectRatio: false,
+			plugins: {
+				subtitle: {
+					display: true,
+					text: 'Abitanti per Provincia'
+				}
+			}
 		}
 	});
 
@@ -425,6 +448,14 @@ function drawCanvasCom(){
 		if(totComune[i].Totale>pop_max)
 		pop_max = totComune[i].Totale;
 	}
+	
+	if(pop_max>500000)
+	pop_max = pop_max/50;
+	else if(pop_max>800000)
+	pop_max = pop_max/80;
+	else if(pop_max>2000000)
+	pop_max = pop_max/500;
+	else
 	pop_max = pop_max/10;
 
 	for(i=0; i<totComune.length; i++){
@@ -444,13 +475,20 @@ function drawCanvasCom(){
 		data: {
 			labels: labels,
 			datasets: [{
-				label: 'Abitanti per Comune',
 				data: chartdata,
 				backgroundColor: colors,
 				borderWidth: 1
 			}]
 		},
 		options: {
+			responsive: true,
+    		maintainAspectRatio: false,
+			plugins: {
+				subtitle: {
+					display: true,
+					text: 'Abitanti dei più grandi Comuni'
+				}
+			}
 		}
 	});
 
