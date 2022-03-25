@@ -13,6 +13,9 @@ var chartdata = new Array();
 var colors = new Array();
 var r,g,b = 0;
 var visibility = new Array();
+var mobile_s = window.matchMedia("(max-width: 320px)");
+var mobile_l = window.matchMedia("(max-width: 425px)"); //Telefono
+
 
 //Classi 
 
@@ -160,27 +163,52 @@ async function drawCanvasReg(){
 	}
 
 	var ctx = document.getElementById('population_charts').getContext('2d');
-	var ChartReg = new Chart(ctx, {
-    	type: 'pie',
-    	data: {
-			labels: labels,
-			datasets: [{
-				data: chartdata,
-				backgroundColor: colors,
-				borderWidth: 1
-			}]
-    	},
-    	options: {
-			responsive: true,
-    		maintainAspectRatio: false,
-			plugins: {
-				subtitle: {
-					display: true,
-					text: 'Abitanti per Regione'
+		if(mobile_l.matches || mobile_s.matches){
+			//console.log("Telefono");
+			var ChartReg = new Chart(ctx, {
+				type: 'pie',
+				data: {
+					labels: labels,
+					datasets: [{
+						data: chartdata,
+						backgroundColor: colors,
+						borderWidth: 1
+					}]
+				},
+				options: {
+					plugins: {
+						subtitle: {
+							display: true,
+							text: 'Abitanti per Regione'
+						}
+					}
 				}
-			}
-    	}
-	});
+			});
+		}else{
+			//console.log("Computer");
+			var ChartReg = new Chart(ctx, {
+				type: 'pie',
+				data: {
+					labels: labels,
+					datasets: [{
+						data: chartdata,
+						backgroundColor: colors,
+						borderWidth: 1
+					}]
+				},
+				options: {
+					responsive: true,
+					maintainAspectRatio: false,
+					plugins: {
+						subtitle: {
+							display: true,
+							text: 'Abitanti per Regione'
+						}
+					}
+				}
+			});
+		}
+
 
 	labels = [];
 	chartdata = [];
@@ -190,9 +218,8 @@ async function drawCanvasReg(){
 
 modifyTitle();
 
-async function modifyTitle(){
-	var x = window.matchMedia("(max-width: 320px)");
-	if (x.matches) { // If media query matches
+async function modifyTitle(){	
+	if (mobile_s.matches) { // If media query matches
 		document.getElementById("title").textContent = "Censimento 2011";
 	}
 }
@@ -406,27 +433,50 @@ function drawCanvasProv(){
 	}
 
 	const ctx = document.getElementById('population_charts').getContext('2d');
-	const ChartProv = new Chart(ctx, {
-		type: 'pie',
-		data: {
-			labels: labels,
-			datasets: [{
-				data: chartdata,
-				backgroundColor: colors,
-				borderWidth: 1
-			}]
-		},
-		options: {
-			responsive: true,
-    		maintainAspectRatio: false,
-			plugins: {
-				subtitle: {
-					display: true,
-					text: 'Abitanti per Provincia'
+
+	if(mobile_l.matches || mobile_s.matches){
+		const ChartProv = new Chart(ctx, {
+			type: 'pie',
+			data: {
+				labels: labels,
+				datasets: [{
+					data: chartdata,
+					backgroundColor: colors,
+					borderWidth: 1
+				}]
+			},
+			options: {
+				plugins: {
+					subtitle: {
+						display: true,
+						text: 'Abitanti per Provincia'
+					}
 				}
 			}
-		}
-	});
+		});
+	}else{
+		var ChartProv = new Chart(ctx, {
+			type: 'pie',
+			data: {
+				labels: labels,
+				datasets: [{
+					data: chartdata,
+					backgroundColor: colors,
+					borderWidth: 1
+				}]
+			},
+			options: {
+				responsive: true,
+				maintainAspectRatio: false,
+				plugins: {
+					subtitle: {
+						display: true,
+						text: 'Abitanti per Provincia'
+					}
+				}
+			}
+		});
+	}
 
 	labels = [];
 	chartdata = [];
@@ -470,27 +520,50 @@ function drawCanvasCom(){
 	}
 
 	const ctx = document.getElementById('population_charts').getContext('2d');
-	const ChartCom = new Chart(ctx, {
-		type: 'pie',
-		data: {
-			labels: labels,
-			datasets: [{
-				data: chartdata,
-				backgroundColor: colors,
-				borderWidth: 1
-			}]
-		},
-		options: {
-			responsive: true,
-    		maintainAspectRatio: false,
-			plugins: {
-				subtitle: {
-					display: true,
-					text: 'Abitanti dei più grandi Comuni'
+
+	if(mobile_l.matches || mobile_s.matches){
+		const ChartCom = new Chart(ctx, {
+			type: 'pie',
+			data: {
+				labels: labels,
+				datasets: [{
+					data: chartdata,
+					backgroundColor: colors,
+					borderWidth: 1
+				}]
+			},
+			options: {
+				plugins: {
+					subtitle: {
+						display: true,
+						text: 'Abitanti dei più grandi Comuni'
+					}
 				}
 			}
-		}
-	});
+		});
+	}else{
+		const ChartCom = new Chart(ctx, {
+			type: 'pie',
+			data: {
+				labels: labels,
+				datasets: [{
+					data: chartdata,
+					backgroundColor: colors,
+					borderWidth: 1
+				}]
+			},
+			options: {
+				responsive: true,
+				maintainAspectRatio: false,
+				plugins: {
+					subtitle: {
+						display: true,
+						text: 'Abitanti dei più grandi Comuni'
+					}
+				}
+			}
+		});
+	}
 
 	labels = [];
 	chartdata = [];
